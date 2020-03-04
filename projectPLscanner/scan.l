@@ -9,24 +9,24 @@
 %}
  
 VAR            [n-z][0-9]*
-FUNK           [a-m][0-9]*
-PRAEDIKAT      [A-Z][0-9]*
+FUNC           [a-m][0-9]*
+PRAEDICATE      [A-Z][0-9]*
 
 %%
 
-{VAR}   {
+{VAR} {
    printf("scanned variable %s\n", yytext);
    /* return VAR; */
 }
 
-{FUNK}   {
+{FUNC} {
    printf("scanned function %s\n", yytext);
-   /* return FUNK; */
+   /* return FUNC; */
 }
 
-{PRAEDIKAT} {
-   printf("scanned praedikat %s\n", yytext);
-   /* return PRAEDIKATIKAT; */
+{PRAEDICATE} {
+   printf("scanned praedicate %s\n", yytext);
+   /* return PRAEDICATE */
 }
 
 "&" {
@@ -69,19 +69,19 @@ PRAEDIKAT      [A-Z][0-9]*
    /* return TOP; */
 }
 
-"bot" {
+"bottom" {
    printf("scanned bot %s\n", yytext);
    /* return BOT; */
 }
 
 "("  {
-   printf("scanned cOpen %s\n", yytext);
-   /* return COPEN; */
+   printf("scanned OPENPAR %s\n", yytext);
+   /* return OPENPAR; */
 }
 
 ")" {
-   printf("scanned cClose %s\n", yytext);
-   /* return CCLOSE; */
+   printf("scanned CLOSEPAR %s\n", yytext);
+   /* return CLOSEPAR; */
 }
 
 "," {
@@ -90,7 +90,7 @@ PRAEDIKAT      [A-Z][0-9]*
 }
 
 " " {
-   printf("scanned space\n");
+     /* DO NOTHING */
 }
 
 \n|. { 
