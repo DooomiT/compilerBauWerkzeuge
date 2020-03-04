@@ -1,0 +1,1 @@
+Datenstrukturen - ImplementierungEntwickeln Sie C-Datenstrukturen (structs) f ̈ur die genannten Ausdr ̈ucke.Hilfreich sind Funktionen f ̈ur die folgenden Aufgaben:Erzeugen eines neuen Ausdrucks, z.B.term* createTerm (char* varfunc, termList* tl),Einf ̈ugen und Entfernen von Listen-Elementen,Textuelle Ausgabe von Datentypen zur Kontrolle.
