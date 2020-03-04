@@ -2,30 +2,37 @@
 
 %option noyywrap
 
+%{
+   #include "pTest.tab.h"
+%}
 
 %{
    int    intval   = 0;
    double floatval = 0.0;
 %}
  
-VARIABLE            [n-z][0-9]*
-FUNCTION       [a-m][0-9]*
+VARIABLE    [n-z][0-9]*
+FUNCTION    [a-m][0-9]*
 PREDICATE   [A-Z][0-9]*
 
 %%
 
 {VARIABLE} {
    printf("scanned variable %s\n", yytext);
+   yylval.sval = yytext;
    return VARIABLE;
 }
 
 {FUNCTION}   {
+
    printf("scanned function %s\n", yytext);
+   yylval.sval = yytext;
    return FUNCTION;
 }
 
 {PREDICATE} {
    printf("scanned predicate %s\n", yytext);
+   yylval.sval = yytext;
    return PREDICATE;
 }
 
@@ -71,7 +78,7 @@ PREDICATE   [A-Z][0-9]*
 
 "bottom" {
    printf("scanned bot %s\n", yytext);
-   return BOT;
+   return BOTTOM;
 }
 
 "("  {
@@ -93,18 +100,8 @@ PREDICATE   [A-Z][0-9]*
 }
 
 \n|. { 
+   return NEWLINE;
       }
 %%
 
-int main( int argc, char **argv )       
-{
-   ++argv, --argc;  /* skip over program name */
-   if ( argc > 0 )
-      yyin = fopen( argv[0], "r" );
-   else
-      yyin = stdin;
-   
-   yylex();
-   
-   printf("Final  %d : %f\n", intval, floatval);
-}
+
