@@ -9,11 +9,16 @@
 %}
 
 DIGIT    [0-9]  
+V      [n-z][0-9]*
+F     [a-m][0-9]*
+P     [A-Z][0-9]*
 
 
 %%
 
-
+{V}   {
+   printf("scanned Praedikat %s\n", yytext);
+}
 
 {DIGIT}+    {
    printf( "int:   %d (\"%s\")\n", atoi(yytext), yytext );
