@@ -7,8 +7,7 @@
    int    intval   = 0;
    double floatval = 0.0;
 %}
-
-DIGIT    [0-9]  
+ 
 V      [n-z][0-9]*
 F     [a-m][0-9]*
 P     [A-Z][0-9]*
@@ -17,18 +16,9 @@ P     [A-Z][0-9]*
 %%
 
 {V}   {
-   printf("scanned Praedikat %s\n", yytext);
+   printf("scanned variable %s\n", yytext);
 }
 
-{DIGIT}+    {
-   printf( "int:   %d (\"%s\")\n", atoi(yytext), yytext );
-            intval += atoi(yytext);
-            }
-
-{DIGIT}+"."{DIGIT}*        {
-            printf( "float: %f (\"%s\")\n", atof(yytext),yytext );
-            floatval += atof(yytext);
-            }
 
 reset {
         intval = 0; 
