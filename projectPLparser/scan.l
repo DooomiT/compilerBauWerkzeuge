@@ -37,66 +37,67 @@ PREDICATE   [A-Z][0-9]*
 }
 
 "&" {
-   printf("scanned AND %s\n", yytext);
+   printf("scanned AND\n");
    return AND;
 }
 
 "|"  {
-   printf("scanned OR %s\n", yytext);
+   printf("scanned OR\n");
    return OR;
 }
 
 "~" {
-   printf("scanned NOT %s\n", yytext);
+   printf("scanned NOT\n");
    return NOT;
 }
 
 "->" {
-   printf("scanned implikation %s\n", yytext);
+   printf("scanned implikation\n");
    return IMP;
 }
 
 "<->"  {
-   printf("scanned biimplikation %s\n", yytext);
+   printf("scanned biimplikation\n");
    return BIIMP;
 }
 
 "all" {
-   printf("scanned allquantor %s\n", yytext);
+   printf("scanned allquantor\n");
    return ALL;
 }
 
 "ex"  {
-   printf("scanned existencequantor %s\n", yytext);
+   printf("scanned ex\n");
    return EX;
 }
 
 "top" {
-   printf("scanned top %s\n", yytext);
+   printf("scanned top\n");
    return TOP;
 }
 
 "bottom" {
-   printf("scanned bot %s\n", yytext);
+   printf("scanned bot\n");
    return BOTTOM;
 }
 
 "("  {
-   printf("scanned openpar %s\n", yytext);
+   printf("scanned open brackets\n");
    return OPENPAR;
 }
 
 ")" {
-   printf("scanned closepar %s\n", yytext);
+   printf("scanned close brackets\n");
    return CLOSEPAR;
 }
 
 "," {
-   printf("scanned komma %s\n", yytext);
+   printf("scanned comma\n");
    return KOMMA;
 }
 
 " " {
+   /* DO NOTHING */
 }
 
 \n|. { 
