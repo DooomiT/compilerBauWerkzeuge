@@ -22,10 +22,10 @@
 %token KOMMA
 %token NEWLINE
 
-%precedence BIIMP
-%precedence IMP
-%precedence OR
-%precedence AND
+%left BIIMP
+%left IMP
+%left OR
+%left AND
 %precedence NOT
 %precedence ALL
 %precedence EX
@@ -49,14 +49,14 @@ stmt: VARIABLE
     | formula  
     | junction
 
-/* declaring term: x or f(termArgs) */
+/* declaring term: x or f or f(termArgs) */
 term: VARIABLE {printf("reducing variable %s to term\n", $<sval>1);}
-    | FUNCTION OPENPAR termArgs CLOSEPAR {printf("reducing function %s to term\n", $<sval>3);};
-/* declaring termArgs: x or f(x,...),... */
+    | FUNCTION {printf("reducing function %s to term\n", $<sval>1);}
+    | FUNCTION OPENPAR termArgs CLOSEPAR {printf("reducing function %s to term\n", $<sval>3);}
+    
+/* declaring termArgs: (x) or (f) or (f(x,...),...) */
 termArgs: term
-    | term KOMMA term {printf("reducing %s to term\n", $<sval>1);}
-    | term, FUNCTION
-    | FUNCTION, term;
+    | term KOMMA termArgs {printf("reducing %s to term\n", $<sval>1);};
 
 /* declaring atom: P or P(predArgs) */
 atom: PREDICATE {printf("reducing predicate to atom %s\n", $<sval>1);}
