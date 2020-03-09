@@ -40,38 +40,48 @@ stmtseq: /* Empty */
     | stmt  NEWLINE stmtseq {}
     | error NEWLINE stmtseq {};  /* After an error, start afresh */
 
-stmt: formula
-    | VARIABLE
+/* Declaring Passable stmts */
+stmt: VARIABLE
     | FUNCTION
     | PREDICATE
-    | quant
-   
-    | junction;
-    
+    | term
+    | atom
+    | formula  
+    | junction
+
+/* declaring term: x or f(termArgs) */
 term: VARIABLE {printf("reducing variable %s to term\n", $<sval>1);}
-    | FUNCTION OPENPAR term CLOSEPAR {printf("reducing term %s to term\n", $<sval>3);}
-    | term KOMMA term {printf("reducing to %s to term\n", $<sval>1);};
+    | FUNCTION OPENPAR termArgs CLOSEPAR {printf("reducing function %s to term\n", $<sval>3);};
+/* declaring termArgs: x or f(x,...),... */
+termArgs: term
+    | term KOMMA term {printf("reducing %s to term\n", $<sval>1);}
+    | term, FUNCTION
+    | FUNCTION, term;
 
-args: OPENPAR term CLOSEPAR;
+/* declaring atom: P or P(predArgs) */
+atom: PREDICATE {printf("reducing predicate to atom %s\n", $<sval>1);}
+    | PREDICATE OPENPAR predArgs CLOSEPAR {printf("reducing %s to atom\n", $<sval>1);};
+/* declaring predArgs: term */
+predArgs: term;
 
-atom: PREDICATE {printf("reducing to atom %s\n", $<sval>1);}
-    | PREDICATE args {printf("reducing to atom %s\n", $<sval>1);};
-
-formula: atom {printf("reduced formula %s\n", $<sval>1);} 
-    | quant
-    | junction 
+/* declaring formula: */
+formula: atom {printf("reducing atom to formula %s\n", $<sval>1);} 
+    | quant VARIABLE formula {printf("reducing to %s formula\n", $<sval>1);};
+    | formula junction formula {printf("reducing %s to formula\n", $<sval>2);}
     | NOT formula {printf("reducing negation %s\n", $<sval>1);}
     | OPENPAR formula CLOSEPAR {printf("reducing brackets %s%s%s\n",$<sval>1, $<sval>2, $<sval>3);};
     | TOP
     | BOTTOM;
 
-quant: ALL VARIABLE formula {printf("reducing to all formula %s\n", $<sval>1);}
-    | EX VARIABLE formula {printf("reducing to existential formula %s\n", $<sval>1);};
+/* declaring quantors: ex, all */
+quant: ALL 
+    | EX;
 
-junction: formula AND formula {printf("reducing to conjunction %s\n", $<sval>1);}
-    | formula OR formula {printf("reducing to disjunction %s\n", $<sval>1);}
-    | formula IMP formula {printf("reducing to implication formula %s\n", $<sval>1);}
-    | formula BIIMP formula {printf("reducing to biimplication%s\n", $<sval>1);};
+/* declaring junctions: and, or, imp, biimp */
+junction: AND 
+    | OR 
+    | IMP 
+    | BIIMP;
 %%
 
 int yyerror(char* err)
