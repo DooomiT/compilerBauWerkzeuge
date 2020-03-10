@@ -41,10 +41,7 @@ stmtseq: /* Empty */
     | error NEWLINE stmtseq {};  /* After an error, start afresh */
 
 /* Declaring Passable stmts */
-stmt: VARIABLE
-    | FUNCTION
-    | PREDICATE
-    | term
+stmt: term
     | atom
     | formula  
     | junction
@@ -52,7 +49,7 @@ stmt: VARIABLE
 /* declaring term: x or f or f(termArgs) */
 term: VARIABLE {printf("reducing variable %s to term\n", $<sval>1);}
     | FUNCTION {printf("reducing function %s to term\n", $<sval>1);}
-    | FUNCTION OPENPAR termArgs CLOSEPAR {printf("reducing function %s to term\n", $<sval>3);}
+    | FUNCTION OPENPAR termArgs CLOSEPAR {printf("reducing function %s to term\n", $<sval>3);};
     
 /* declaring termArgs: (x) or (f) or (f(x,...),...) */
 termArgs: term
@@ -62,14 +59,15 @@ termArgs: term
 atom: PREDICATE {printf("reducing predicate to atom %s\n", $<sval>1);}
     | PREDICATE OPENPAR predArgs CLOSEPAR {printf("reducing %s to atom\n", $<sval>1);};
 /* declaring predArgs: term */
-predArgs: term;
+predArgs: term
+    | term KOMMA predArgs;
 
 /* declaring formula: */
-formula: atom {printf("reducing atom to formula %s\n", $<sval>1);} 
-    | quant VARIABLE formula {printf("reducing to %s formula\n", $<sval>1);};
+formula: atom {printf("reducing atom to formula %s\n", $<sval>1);}     
     | formula junction formula {printf("reducing %s to formula\n", $<sval>2);}
     | NOT formula {printf("reducing negation %s\n", $<sval>1);}
-    | OPENPAR formula CLOSEPAR {printf("reducing brackets %s%s%s\n",$<sval>1, $<sval>2, $<sval>3);};
+    | OPENPAR formula CLOSEPAR
+    | quant VARIABLE formula {printf("reducing to %s formula\n", $<sval>1);}
     | TOP
     | BOTTOM;
 
