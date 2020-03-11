@@ -52,15 +52,15 @@ extern int yydebug;
     BOTTOM = 262,
     KOMMA = 263,
     NEWLINE = 264,
-    BIIMP = 265,
-    IMP = 266,
-    OR = 267,
-    AND = 268,
-    NOT = 269,
-    ALL = 270,
-    EX = 271,
-    PREDICATE = 272,
-    FUNCTION = 273
+    NOT = 265,
+    ALL = 266,
+    EX = 267,
+    PREDICATE = 268,
+    FUNCTION = 269,
+    BIIMP = 270,
+    IMP = 271,
+    OR = 272,
+    AND = 273
   };
 #endif
 

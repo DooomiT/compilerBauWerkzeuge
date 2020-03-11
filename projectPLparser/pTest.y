@@ -15,22 +15,23 @@
 %start stmtseq
 
 %token VARIABLE
-%token OPENPAR
+%precedence OPENPAR
 %token CLOSEPAR
 %token TOP
 %token BOTTOM
 %token KOMMA
 %token NEWLINE
 
-%left BIIMP
-%left IMP
-%left OR
-%left AND
 %precedence NOT
 %precedence ALL
 %precedence EX
 %precedence PREDICATE
 %precedence FUNCTION
+%left BIIMP
+%left IMP
+%left OR
+%left AND
+
 
 
 %%
@@ -44,12 +45,11 @@ stmtseq: /* Empty */
 stmt: term
     | atom
     | formula  
-    | junction
 
 /* declaring term: x or f or f(termArgs) */
 term: VARIABLE {printf("reducing variable %s to term\n", $<sval>1);}
     | FUNCTION {printf("reducing function %s to term\n", $<sval>1);}
-    | FUNCTION OPENPAR termArgs CLOSEPAR {printf("reducing function %s to term\n", $<sval>3);};
+    | FUNCTION OPENPAR termArgs CLOSEPAR {printf("reducing function %s to term\n", $<sval>1);};
     
 /* declaring termArgs: (x) or (f) or (f(x,...),...) */
 termArgs: term
@@ -63,10 +63,10 @@ predArgs: term
     | term KOMMA predArgs;
 
 /* declaring formula: */
-formula: atom {printf("reducing atom to formula %s\n", $<sval>1);}     
-    | formula junction formula {printf("reducing %s to formula\n", $<sval>2);}
+formula: atom {printf("reducing atom %s to formula\n", $<sval>1);}     
+    | formula junction formula {printf("reducing %s to formula\n", $<sval>1);}
     | NOT formula {printf("reducing negation %s\n", $<sval>1);}
-    | OPENPAR formula CLOSEPAR
+    | OPENPAR formula CLOSEPAR {printf("reducing %s to formula\n", $<sval>1);}
     | quant VARIABLE formula {printf("reducing to %s formula\n", $<sval>1);}
     | TOP
     | BOTTOM;
