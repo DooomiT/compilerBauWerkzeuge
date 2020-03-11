@@ -19,20 +19,20 @@ PREDICATE   [A-Z][0-9]*
 
 {VARIABLE} {
    printf("scanned variable %s\n", yytext);
-   yylval.sval = yytext;
+   yylval.sval = strdup(yytext);
    return VARIABLE;
 }
 
 {FUNCTION}   {
 
    printf("scanned function %s\n", yytext);
-   yylval.sval = yytext;
+   yylval.sval = strdup(yytext);
    return FUNCTION;
 }
 
 {PREDICATE} {
    printf("scanned predicate %s\n", yytext);
-   yylval.sval = yytext;
+   yylval.sval = strdup(yytext);
    return PREDICATE;
 }
 

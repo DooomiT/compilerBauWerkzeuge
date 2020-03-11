@@ -1,5 +1,6 @@
 %{
     #include <stdio.h>
+    #include <string.h>
     // Declare stuff from Flex that Bison needs to know about:
     extern int yyparse();
     extern int yyerror(char* err);
@@ -45,31 +46,146 @@ stmt: term
     | formula  
 
 /* declaring term: x or f or f(termArgs) */
-term: VARIABLE {printf("reducing variable %s to term\n", $<sval>1);}
-    | FUNCTION {printf("reducing function %s to term\n", $<sval>1);}
-    | FUNCTION OPENPAR termArgs CLOSEPAR {printf("reducing function %s to term\n", $<sval>1);};
+term: VARIABLE {
+        $<sval>$ = $<sval>1;
+        printf("reducing VARIABLE %s to term\n", $<sval>$);
+      }
+    | FUNCTION {
+        $<sval>$ = $<sval>1;
+        printf("reducing FUNCTION %s to term\n", $<sval>$);
+      }
+    | FUNCTION OPENPAR termArgs CLOSEPAR {
+        char * x = malloc((strlen($<sval>1) + 20 + strlen($<sval>3))* sizeof(char));
+        strcat(x, $<sval>1); 
+        strcat(x, " ( "); 
+        strcat(x, $<sval>3);
+        strcat(x, " ) ");
+        strcat(x,  $<sval>3);
+        $<sval>$ = strdup(x);
+        free(x);
+        printf("reducing FUNCTION %s to term\n", $<sval>$);
+      };
     
 /* declaring termArgs: (x) or (f) or (f(x,...),...) */
-termArgs: term {printf("last term to term %s\n", $<sval>1);}
-    | term KOMMA termArgs {printf("reducing %s to termArgs\n", $<sval>1);};
+termArgs: term {
+        $<sval>$ = $<sval>1;
+        printf("reducing term %s to termArgs\n", $<sval>$);
+      }
+    | term KOMMA termArgs {
+        char * x = malloc((strlen($<sval>1) + 20 + strlen($<sval>3))* sizeof(char));
+        strcat(x, $<sval>1);
+        strcat(x, " , "); 
+        strcat(x,  $<sval>3);
+        $<sval>$ = strdup(x);
+        free(x);
+        printf("reducing term %s to termArgs\n", $<sval>$);
+      };
 
 /* declaring atom: P or P(predArgs) */
-atom: PREDICATE {printf("reducing predicate to atom %s\n", $<sval>1);}
-    | PREDICATE OPENPAR predArgs CLOSEPAR {printf("reducing %s to atom\n", $<sval>1);};
+atom: PREDICATE {
+        $<sval>$ = $<sval>1;
+        printf("reducing PREDICATE %s to atom\n", $<sval>$);
+      }
+    | PREDICATE OPENPAR predArgs CLOSEPAR {
+        char * x = malloc((strlen($<sval>1) + 20 + strlen($<sval>3))* sizeof(char));
+        strcat(x, $<sval>1); 
+        strcat(x, " ( "); 
+        strcat(x, $<sval>3);
+        strcat(x, " ) ");
+        strcat(x,  $<sval>3);
+        $<sval>$ = strdup(x);
+        free(x);
+        printf("reducing PREDICATE %s to atom\n", $<sval>$);
+      };
+
 /* declaring predArgs: term */
-predArgs: term
-    | term KOMMA predArgs {printf("reducing %s to predArgs\n", $<sval>1);};
+predArgs: term {
+        $<sval>$ = $<sval>1;
+        printf("reducing term %s to predArgs\n", $<sval>$);
+      }
+    | term KOMMA predArgs {
+        char * x = malloc((strlen($<sval>1) + 20 + strlen($<sval>3))* sizeof(char));
+        strcat(x, $<sval>1);
+        strcat(x, " , "); 
+        strcat(x,  $<sval>3);
+        $<sval>$ = strdup(x);
+        free(x);
+        printf("reducing term %s to predArgs\n", $<sval>$);
+      };
 
 /* declaring formula: */
 formula: atom {printf("reducing atom %s to formula\n", $<sval>1);}     
-    | formula AND formula {printf("reducing %s to formula\n", $<sval>1);}
-    | formula OR formula {printf("reducing %s to formula\n", $<sval>1);}
-    | formula IMP formula {printf("reducing %s to formula\n", $<sval>1);}
-    | formula BIIMP formula {printf("reducing %s to formula\n", $<sval>1);}
-    | NOT formula {printf("reducing negation %s\n", $<sval>1);}
-    | OPENPAR formula CLOSEPAR {printf("reducing %s to formula\n", $<sval>1);}
-    | ALL VARIABLE formula {printf("reducing to all formula %s\n", $<sval>1);}
-    | EX VARIABLE formula {printf("reducing to ex formula %s\n", $<sval>1);}
+    | formula AND formula {
+        char * x = malloc((strlen($<sval>1) + 20 + strlen($<sval>3))* sizeof(char));
+        strcat(x, $<sval>1);
+        strcat(x, " AND "); 
+        strcat(x,  $<sval>3);
+        $<sval>$ = strdup(x);
+        free(x);
+        printf("reducing %s to formula\n", $<sval>$);
+      }
+    | formula OR formula {
+        char * x = malloc((strlen($<sval>1) + 20 + strlen($<sval>3))* sizeof(char));
+        strcat(x, $<sval>1);
+        strcat(x, " OR "); 
+        strcat(x,  $<sval>3);
+        $<sval>$ = strdup(x);
+        free(x);
+        printf("reducing %s to formula\n", $<sval>$);
+      }
+    | formula IMP formula {
+        char * x = malloc((strlen($<sval>1) + 20 + strlen($<sval>3))* sizeof(char));
+        strcat(x, $<sval>1);
+        strcat(x, " IMP "); 
+        strcat(x,  $<sval>3);
+        $<sval>$ = strdup(x);
+        free(x);
+        printf("reducing %s to formula\n", $<sval>$);
+      }
+    | formula BIIMP formula {
+        char * x = malloc((strlen($<sval>1) + 20 + strlen($<sval>3))* sizeof(char));
+        strcat(x, $<sval>1);
+        strcat(x, " BIIMP "); 
+        strcat(x,  $<sval>3);
+        $<sval>$ = strdup(x);
+        free(x);
+        printf("reducing %s to formula\n", $<sval>$);
+      }
+    | NOT formula {
+        char * x = malloc((strlen($<sval>2) + 20)* sizeof(char));
+        strcat(x, " NOT ");
+        strcat(x, $<sval>2);
+        $<sval>$ = strdup(x);
+        free(x); 
+        printf("reducing %s to formula\n", $<sval>$);
+      }
+    | OPENPAR formula CLOSEPAR {
+        char * x = malloc((strlen($<sval>2) + 20)* sizeof(char));
+        strcat(x, " ( ");
+        strcat(x, $<sval>2); 
+        strcat(x, " ) ");
+        $<sval>$ = strdup(x);
+        free(x);
+        printf("reducing %s to formula\n", $<sval>$);
+      }
+    | ALL VARIABLE formula {
+        char * x = malloc((strlen($<sval>2) + strlen($<sval>3) + 20)* sizeof(char));
+        strcat (x, " ALL ");
+        strcat(x, $<sval>2); 
+        strcat(x, $<sval>3);
+        $<sval>$ = strdup(x);
+        free(x);
+        printf("reducing %s to formula\n", $<sval>$);
+      }
+    | EX VARIABLE formula {
+        char * x = malloc((strlen($<sval>2) + strlen($<sval>3) + 20)* sizeof(char));
+        strcat (x, " EX ");
+        strcat(x, $<sval>2); 
+        strcat(x, $<sval>3);
+        $<sval>$ = strdup(x);
+        free(x);
+        printf("reducing %s to formula\n", $<sval>$);
+      }
     | TOP
     | BOTTOM;
 %%
