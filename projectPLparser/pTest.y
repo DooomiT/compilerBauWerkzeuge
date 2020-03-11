@@ -169,7 +169,7 @@ formula: atom {printf("reducing atom %s to formula\n", $<sval>1);}
       }
     | ALL VARIABLE formula {
         char * x = malloc((strlen($<sval>2) + strlen($<sval>3) + 20)* sizeof(char));
-        strcat (x, " ALL ");
+        strcat(x, " ALL ");
         strcat(x, $<sval>2); 
         strcat(x, $<sval>3);
         $<sval>$ = strdup(x);
@@ -178,7 +178,7 @@ formula: atom {printf("reducing atom %s to formula\n", $<sval>1);}
       }
     | EX VARIABLE formula {
         char * x = malloc((strlen($<sval>2) + strlen($<sval>3) + 20)* sizeof(char));
-        strcat (x, " EX ");
+        strcat(x, " EX ");
         strcat(x, $<sval>2); 
         strcat(x, $<sval>3);
         $<sval>$ = strdup(x);
