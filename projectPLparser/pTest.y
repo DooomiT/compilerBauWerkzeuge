@@ -89,10 +89,9 @@ atom: PREDICATE {
     | PREDICATE OPENPAR predArgs CLOSEPAR {
         char * x = malloc((strlen($<sval>1) + 20 + strlen($<sval>3))* sizeof(char));
         strcat(x, $<sval>1); 
-        strcat(x, " ( "); 
+        strcat(x, " ("); 
         strcat(x, $<sval>3);
-        strcat(x, " ) ");
-        strcat(x,  $<sval>3);
+        strcat(x, ") ");
         $<sval>$ = strdup(x);
         free(x);
         printf("reducing PREDICATE %s to atom\n", $<sval>$);
@@ -161,9 +160,9 @@ formula: atom {printf("reducing atom %s to formula\n", $<sval>1);}
       }
     | OPENPAR formula CLOSEPAR {
         char * x = malloc((strlen($<sval>2) + 20)* sizeof(char));
-        strcat(x, " ( ");
+        strcat(x, " (");
         strcat(x, $<sval>2); 
-        strcat(x, " ) ");
+        strcat(x, ") ");
         $<sval>$ = strdup(x);
         free(x);
         printf("reducing %s to formula\n", $<sval>$);
