@@ -23,16 +23,15 @@
 %token KOMMA
 %token NEWLINE
 
-%left BIIMP
-%left IMP
-%left OR
-%left AND
-
 %precedence NOT
 %precedence ALL EX
 %precedence PREDICATE
 %precedence FUNCTION
 
+%left BIIMP
+%left IMP
+%left OR
+%left AND
 %%
 
 stmtseq: /* Empty */
@@ -41,9 +40,7 @@ stmtseq: /* Empty */
     | error NEWLINE stmtseq {};  /* After an error, start afresh */
 
 /* Declaring Passable stmts */
-stmt: term
-    | atom
-    | formula  
+stmt: formula  
 
 /* declaring term: x or f or f(termArgs) */
 term: VARIABLE {
@@ -113,7 +110,27 @@ predArgs: term {
       };
 
 /* declaring formula: */
-formula: atom {printf("reducing atom %s to formula\n", $<sval>1);}     
+formula: atom {printf("reducing atom %s to formula\n", $<sval>1);}    
+    | TOP
+    | BOTTOM; 
+    | ALL VARIABLE formula {
+        char * x = malloc((strlen($<sval>2) + strlen($<sval>3) + 20)* sizeof(char));
+        strcat(x, " ALL ");
+        strcat(x, $<sval>2); 
+        strcat(x, $<sval>3);
+        $<sval>$ = strdup(x);
+        free(x);
+        printf("reducing %s to formula\n", $<sval>$);
+      }
+    | EX VARIABLE formula {
+        char * x = malloc((strlen($<sval>2) + strlen($<sval>3) + 20)* sizeof(char));
+        strcat(x, " EX ");
+        strcat(x, $<sval>2); 
+        strcat(x, $<sval>3);
+        $<sval>$ = strdup(x);
+        free(x);
+        printf("reducing ex formula %s\n", $<sval>$);
+      }
     | formula AND formula {
         char * x = malloc((strlen($<sval>1) + 20 + strlen($<sval>3))* sizeof(char));
         strcat(x, $<sval>1);
@@ -121,7 +138,7 @@ formula: atom {printf("reducing atom %s to formula\n", $<sval>1);}
         strcat(x,  $<sval>3);
         $<sval>$ = strdup(x);
         free(x);
-        printf("reducing %s to formula\n", $<sval>$);
+        printf("reducing all formula %s\n", $<sval>$);
       }
     | formula OR formula {
         char * x = malloc((strlen($<sval>1) + 20 + strlen($<sval>3))* sizeof(char));
@@ -167,26 +184,6 @@ formula: atom {printf("reducing atom %s to formula\n", $<sval>1);}
         free(x);
         printf("reducing %s to formula\n", $<sval>$);
       }
-    | ALL VARIABLE formula {
-        char * x = malloc((strlen($<sval>2) + strlen($<sval>3) + 20)* sizeof(char));
-        strcat(x, " ALL ");
-        strcat(x, $<sval>2); 
-        strcat(x, $<sval>3);
-        $<sval>$ = strdup(x);
-        free(x);
-        printf("reducing %s to formula\n", $<sval>$);
-      }
-    | EX VARIABLE formula {
-        char * x = malloc((strlen($<sval>2) + strlen($<sval>3) + 20)* sizeof(char));
-        strcat(x, " EX ");
-        strcat(x, $<sval>2); 
-        strcat(x, $<sval>3);
-        $<sval>$ = strdup(x);
-        free(x);
-        printf("reducing %s to formula\n", $<sval>$);
-      }
-    | TOP
-    | BOTTOM;
 %%
 
 int yyerror(char* err)
