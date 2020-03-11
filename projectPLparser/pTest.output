@@ -53,15 +53,15 @@ TOP (261) 26
 BOTTOM (262) 27
 KOMMA (263) 12 16
 NEWLINE (264) 2 3 4
-NOT (265) 22
-ALL (266) 24
-EX (267) 25
-PREDICATE (268) 13 14
-FUNCTION (269) 9 10
-BIIMP (270) 21
-IMP (271) 20
-OR (272) 19
-AND (273) 18
+BIIMP (265) 21
+IMP (266) 20
+OR (267) 19
+AND (268) 18
+NOT (269) 22
+ALL (270) 24
+EX (271) 25
+PREDICATE (272) 13 14
+FUNCTION (273) 9 10
 
 
 Nonterminals, with rules where they appear
@@ -337,11 +337,6 @@ State 21
    20        | formula . IMP formula
    21        | formula . BIIMP formula
    22        | NOT formula .
-
-    BIIMP  shift, and go to state 28
-    IMP    shift, and go to state 29
-    OR     shift, and go to state 30
-    AND    shift, and go to state 31
 
     $default  reduce using rule 22 (formula)
 

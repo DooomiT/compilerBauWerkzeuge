@@ -15,24 +15,22 @@
 %start stmtseq
 
 %token VARIABLE
-%precedence OPENPAR
+%token OPENPAR
 %token CLOSEPAR
 %token TOP
 %token BOTTOM
 %token KOMMA
 %token NEWLINE
 
-%precedence NOT
-%precedence ALL
-%precedence EX
-%precedence PREDICATE
-%precedence FUNCTION
 %left BIIMP
 %left IMP
 %left OR
 %left AND
 
-
+%precedence NOT
+%precedence ALL EX
+%precedence PREDICATE
+%precedence FUNCTION
 
 %%
 
