@@ -52,34 +52,28 @@ term: VARIABLE {printf("reducing variable %s to term\n", $<sval>1);}
     | FUNCTION OPENPAR termArgs CLOSEPAR {printf("reducing function %s to term\n", $<sval>1);};
     
 /* declaring termArgs: (x) or (f) or (f(x,...),...) */
-termArgs: term
-    | term KOMMA termArgs {printf("reducing %s to term\n", $<sval>1);};
+termArgs: term {printf("last term to term %s\n", $<sval>1);}
+    | term KOMMA termArgs {printf("reducing %s to termArgs\n", $<sval>1);};
 
 /* declaring atom: P or P(predArgs) */
 atom: PREDICATE {printf("reducing predicate to atom %s\n", $<sval>1);}
     | PREDICATE OPENPAR predArgs CLOSEPAR {printf("reducing %s to atom\n", $<sval>1);};
 /* declaring predArgs: term */
 predArgs: term
-    | term KOMMA predArgs;
+    | term KOMMA predArgs {printf("reducing %s to predArgs\n", $<sval>1);};
 
 /* declaring formula: */
 formula: atom {printf("reducing atom %s to formula\n", $<sval>1);}     
-    | formula junction formula {printf("reducing %s to formula\n", $<sval>1);}
+    | formula AND formula {printf("reducing %s to formula\n", $<sval>1);}
+    | formula OR formula {printf("reducing %s to formula\n", $<sval>1);}
+    | formula IMP formula {printf("reducing %s to formula\n", $<sval>1);}
+    | formula BIIMP formula {printf("reducing %s to formula\n", $<sval>1);}
     | NOT formula {printf("reducing negation %s\n", $<sval>1);}
     | OPENPAR formula CLOSEPAR {printf("reducing %s to formula\n", $<sval>1);}
-    | quant VARIABLE formula {printf("reducing to %s formula\n", $<sval>1);}
+    | ALL VARIABLE formula {printf("reducing to all formula %s\n", $<sval>1);}
+    | EX VARIABLE formula {printf("reducing to ex formula %s\n", $<sval>1);}
     | TOP
     | BOTTOM;
-
-/* declaring quantors: ex, all */
-quant: ALL 
-    | EX;
-
-/* declaring junctions: and, or, imp, biimp */
-junction: AND 
-    | OR 
-    | IMP 
-    | BIIMP;
 %%
 
 int yyerror(char* err)

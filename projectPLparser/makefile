@@ -7,10 +7,10 @@ all: pTest
 scan.c: scan.l pTest.tab.h
 
 pTest.tab.h: pTest.y
-	$(YACC) -d pTest.y
+	$(YACC) -d -v pTest.y
 
 pTest.tab.c: pTest.y
-	$(YACC) -d pTest.y
+	$(YACC) -d -v pTest.y 
 
 pTest.tab.o: pTest.tab.c
 
