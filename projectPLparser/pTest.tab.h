@@ -45,22 +45,22 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    VARIABLE = 258,
-    OPENPAR = 259,
-    CLOSEPAR = 260,
-    TOP = 261,
-    BOTTOM = 262,
-    KOMMA = 263,
-    NEWLINE = 264,
-    NOT = 265,
-    ALL = 266,
-    EX = 267,
-    PREDICATE = 268,
-    FUNCTION = 269,
-    BIIMP = 270,
-    IMP = 271,
-    OR = 272,
-    AND = 273
+    OPENPAR = 258,
+    CLOSEPAR = 259,
+    KOMMA = 260,
+    NEWLINE = 261,
+    BIIMP = 262,
+    IMP = 263,
+    OR = 264,
+    AND = 265,
+    NOT = 266,
+    ALL = 267,
+    EX = 268,
+    PREDICATE = 269,
+    FUNCTION = 270,
+    VARIABLE = 271,
+    TOP = 272,
+    BOTTOM = 273
   };
 #endif
 
