@@ -109,8 +109,14 @@ predArgs: term {
 
 /* declaring formula: */
 formula: atom {printf("reducing atom %s to formula\n", $<sval>1);}    
-    | TOP
-    | BOTTOM; 
+    | TOP {
+        $<sval>$ = $<sval>1;
+        printf("reducing boolean TOP %s to formula\n", $<sval>$);
+        }
+    | BOTTOM {
+        $<sval>$ = $<sval>1;
+        printf("reducing boolean BOT %s to formula\n", $<sval>$);
+        } 
     | ALL VARIABLE formula {
         char * x = malloc((strlen($<sval>2) + strlen($<sval>3) + 20)* sizeof(char));
         strcat(x, " ALL ");
