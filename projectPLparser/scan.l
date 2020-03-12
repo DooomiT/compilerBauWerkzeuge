@@ -18,81 +18,81 @@ PREDICATE   [A-Z][0-9]*
 %%
 
 {VARIABLE} {
-   printf("scanned variable %s\n", yytext);
+   printf("scanning variable %s\n", yytext);
    yylval.sval = strdup(yytext);
    return VARIABLE;
 }
 
 {FUNCTION}   {
 
-   printf("scanned function %s\n", yytext);
+   printf("scanning function %s\n", yytext);
    yylval.sval = strdup(yytext);
    return FUNCTION;
 }
 
 {PREDICATE} {
-   printf("scanned predicate %s\n", yytext);
+   printf("scanning predicate %s\n", yytext);
    yylval.sval = strdup(yytext);
    return PREDICATE;
 }
 
 "&" {
-   printf("scanned AND\n");
+   printf("scanning AND\n");
    return AND;
 }
 
 "|"  {
-   printf("scanned OR\n");
+   printf("scanning OR\n");
    return OR;
 }
 
 "~" {
-   printf("scanned NOT\n");
+   printf("scanning NOT\n");
    return NOT;
 }
 
 "->" {
-   printf("scanned implikation\n");
+   printf("scanning implikation\n");
    return IMP;
 }
 
 "<->"  {
-   printf("scanned biimplikation\n");
+   printf("scanning biimplikation\n");
    return BIIMP;
 }
 
 "all" {
-   printf("scanned allquantor\n");
+   printf("scanning allquantor\n");
    return ALL;
 }
 
 "ex"  {
-   printf("scanned ex\n");
+   printf("scanning ex\n");
    return EX;
 }
 
 "top" {
-   printf("scanned top\n");
+   printf("scanning top\n");
    return TOP;
 }
 
 "bottom" {
-   printf("scanned bot\n");
+   printf("scanning bot\n");
    return BOTTOM;
 }
 
 "("  {
-   printf("scanned open brackets\n");
+   printf("scanning open brackets\n");
    return OPENPAR;
 }
 
 ")" {
-   printf("scanned close brackets\n");
+   printf("scanning close brackets\n");
    return CLOSEPAR;
 }
 
 "," {
-   printf("scanned comma\n");
+   printf("scanning comma\n");
    return KOMMA;
 }
 

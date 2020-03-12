@@ -1,50 +1,50 @@
  
-scanned ex
-scanned variable x
-scanned open brackets
-scanned predicate P
-scanned open brackets
-scanned variable x
+scanning ex
+scanning variable x
+scanning open brackets
+scanning predicate P
+scanning open brackets
+scanning variable x
 reducing variable x to term
-scanned close brackets
+scanning close brackets
 reducing to atom P(x)
 reducing atom P(x) to formula
-scanned AND
-scanned predicate Q22
-scanned open brackets
-scanned variable x
+scanning AND
+scanning predicate Q22
+scanning open brackets
+scanning variable x
 reducing variable x to term
-scanned comma
-scanned variable y2
+scanning comma
+scanning variable y2
 reducing variable y2 to term
-scanned close brackets
+scanning close brackets
 reducing to atom Q22(x,y2)
 reducing atom Q22(x,y2) to formula
 reducing to conjunction (P(x) AND Q22(x,y2))
-scanned close brackets
+scanning close brackets
 reducing ((P(x) AND Q22(x,y2))) to formula
 reducing to existential formula (EX x((P(x) AND Q22(x,y2))))
-scanned OR
-scanned predicate Q
-scanned open brackets
-scanned variable x
+scanning OR
+scanning predicate Q
+scanning open brackets
+scanning variable x
 reducing variable x to term
-scanned close brackets
+scanning close brackets
 reducing to atom Q(x)
 reducing atom Q(x) to formula
-scanned biimplikation
+scanning biimplikation
 reducing to disjunction ((EX x((P(x) AND Q22(x,y2)))) OR Q(x))
-scanned NOT
-scanned predicate P
-scanned open brackets
-scanned variable x
+scanning NOT
+scanning predicate P
+scanning open brackets
+scanning variable x
 reducing variable x to term
-scanned close brackets
+scanning close brackets
 reducing to atom P(x)
 reducing atom P(x) to formula
 reducing to neagtion (NOT P(x))
-scanned implikation
-scanned bot
+scanning implikation
+scanning bot
 reducing boolean BOT  BOTTOM to formula
 reducing to implication ((NOT P(x)) IMP  BOTTOM)
 reducing to equivalence (((EX x((P(x) AND Q22(x,y2)))) OR Q(x)) EQUIV ((NOT P(x)) IMP  BOTTOM))

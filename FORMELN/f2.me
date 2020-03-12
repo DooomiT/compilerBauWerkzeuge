@@ -1,71 +1,71 @@
  
-scanned open brackets
-scanned allquantor
-scanned variable x
-scanned predicate P
-scanned open brackets
-scanned variable x
+scanning open brackets
+scanning allquantor
+scanning variable x
+scanning predicate P
+scanning open brackets
+scanning variable x
 reducing variable x to term
-scanned close brackets
+scanning close brackets
 reducing to atom P(x)
 reducing atom P(x) to formula
 reducing to all formula (ALL xP(x))
-scanned implikation
-scanned ex
-scanned variable x
-scanned predicate P
-scanned open brackets
-scanned variable x
+scanning implikation
+scanning ex
+scanning variable x
+scanning predicate P
+scanning open brackets
+scanning variable x
 reducing variable x to term
-scanned close brackets
+scanning close brackets
 reducing to atom P(x)
 reducing atom P(x) to formula
 reducing to existential formula (EX xP(x))
-scanned close brackets
+scanning close brackets
 reducing to implication ((ALL xP(x)) IMP (EX xP(x)))
 reducing (((ALL xP(x)) IMP (EX xP(x)))) to formula
-scanned AND
-scanned open brackets
-scanned predicate P
-scanned open brackets
-scanned function c
-scanned close brackets
+scanning AND
+scanning open brackets
+scanning predicate P
+scanning open brackets
+scanning function c
+scanning close brackets
 reducing to term c
 reducing to atom P(c)
 reducing atom P(c) to formula
-scanned OR
-scanned predicate P
-scanned open brackets
-scanned function f
-scanned open brackets
-scanned function c
-scanned close brackets
+scanning OR
+scanning predicate P
+scanning open brackets
+scanning function f
+scanning open brackets
+scanning function c
+scanning close brackets
 reducing to term c
 reducing last term c to term sequence
 reducing to term f(c)
-scanned close brackets
+scanning close brackets
 reducing to atom P(f(c))
 reducing atom P(f(c)) to formula
-scanned OR
+scanning OR
 reducing to disjunction (P(c) OR P(f(c)))
-scanned predicate P
-scanned open brackets
-scanned function f
-scanned open brackets
-scanned function f
-scanned open brackets
-scanned function c
-scanned close brackets
+scanning predicate P
+scanning open brackets
+scanning function f
+scanning open brackets
+scanning function f
+scanning open brackets
+scanning function c
+scanning close brackets
 reducing to term c
 reducing last term c to term sequence
 reducing to term f(c)
-scanned close brackets
+scanning close brackets
 reducing last term f(c) to term sequence
 reducing to term f(f(c))
-scanned close brackets
+scanning close brackets
 reducing to atom P(f(f(c)))
 reducing atom P(f(f(c))) to formula
-scanned close brackets
+scanning close brackets
 reducing to disjunction ((P(c) OR P(f(c))) OR P(f(f(c))))
 reducing (((P(c) OR P(f(c))) OR P(f(f(c))))) to formula
 reducing to conjunction ((((ALL xP(x)) IMP (EX xP(x)))) AND (((P(c) OR P(f(c))) OR P(f(f(c))))))
