@@ -1,3 +1,4 @@
+ 
 scanned ex
 scanned variable x
 scanned open brackets
@@ -21,8 +22,8 @@ reducing to atom Q22(x,y2)
 reducing atom Q22(x,y2) to formula
 reducing to conjunction P(x) AND Q22(x,y2)
 scanned close brackets
-reducing  (P(x) AND Q22(x,y2))  to formula
-reducing to existential formula  EX x (P(x) AND Q22(x,y2))
+reducing (P(x) AND Q22(x,y2)) to formula
+reducing to existential formula  EX x(P(x) AND Q22(x,y2))
 scanned OR
 scanned predicate Q
 scanned open brackets
@@ -32,7 +33,7 @@ scanned close brackets
 reducing to atom Q(x)
 reducing atom Q(x) to formula
 scanned biimplikation
-reducing to disjunction  EX x (P(x) AND Q22(x,y2))  OR Q(x)
+reducing to disjunction  EX x(P(x) AND Q22(x,y2)) OR Q(x)
 scanned NOT
 scanned predicate P
 scanned open brackets
@@ -46,4 +47,5 @@ scanned implikation
 scanned bot
 reducing boolean BOT x to formula
 reducing to implication  NOT P(x) IMP x
-reducing to equivalence  EX x (P(x) AND Q22(x,y2))  OR Q(x) EQUIV  NOT P(x) IMP x
+reducing to equivalence  EX x(P(x) AND Q22(x,y2)) OR Q(x) EQUIV  NOT P(x) IMP x
+Error: syntax error

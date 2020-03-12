@@ -2,6 +2,7 @@
     #include <stdio.h>
     #include <string.h>
     // Declare stuff from Flex that Bison needs to know about:
+    extern FILE *yyin;
     extern int yyparse();
     extern int yyerror(char* err);
     extern int yylex(void);
@@ -196,6 +197,12 @@ int yyerror(char* err)
 
 
 int main (int argc, char* argv[])
-{
+{  
+   ++argv, --argc;  /* skip over program name */
+   if ( argc > 0 )
+      yyin = fopen( argv[0], "r" );
+   else
+      yyin = stdin;
+    
   return yyparse();
 }

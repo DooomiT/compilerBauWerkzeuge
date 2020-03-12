@@ -67,11 +67,6 @@ int yyerror(char* err)
 
 int main (int argc, char* argv[])
 {
-  int i;
 
-  for(i=0; i<MAXREGS; i++)
-  {
-     regfile[i] = 0.0;
-  }
   return yyparse();
 }
