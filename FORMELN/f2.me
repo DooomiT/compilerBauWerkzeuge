@@ -42,12 +42,12 @@ scanned function c
 scanned close brackets
 reducing to term c
 reducing last term c to term sequence
-reducing to term f(c)c
+reducing to term f(c)
 scanned close brackets
-reducing to atom P(f(c)c)
-reducing atom P(f(c)c) to formula
+reducing to atom P(f(c))
+reducing atom P(f(c)) to formula
 scanned OR
-reducing to disjunction P(c) OR P(f(c)c)
+reducing to disjunction P(c) OR P(f(c))
 scanned predicate P
 scanned open brackets
 scanned function f
@@ -58,15 +58,15 @@ scanned function c
 scanned close brackets
 reducing to term c
 reducing last term c to term sequence
-reducing to term f(c)c
+reducing to term f(c)
 scanned close brackets
-reducing last term f(c)c to term sequence
-reducing to term f(f(c)c)f(c)c
+reducing last term f(c) to term sequence
+reducing to term f(f(c))
 scanned close brackets
-reducing to atom P(f(f(c)c)f(c)c)
-reducing atom P(f(f(c)c)f(c)c) to formula
+reducing to atom P(f(f(c)))
+reducing atom P(f(f(c))) to formula
 scanned close brackets
-reducing to disjunction P(c) OR P(f(c)c) OR P(f(f(c)c)f(c)c)
-reducing (P(c) OR P(f(c)c) OR P(f(f(c)c)f(c)c)) to formula
-reducing to conjunction ( ALL xP(x) IMP  EX xP(x)) AND (P(c) OR P(f(c)c) OR P(f(f(c)c)f(c)c))
+reducing to disjunction P(c) OR P(f(c)) OR P(f(f(c)))
+reducing (P(c) OR P(f(c)) OR P(f(f(c)))) to formula
+reducing to conjunction ( ALL xP(x) IMP  EX xP(x)) AND (P(c) OR P(f(c)) OR P(f(f(c))))
 Error: syntax error

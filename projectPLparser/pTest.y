@@ -43,12 +43,10 @@ stmt: formula
 
 /* declaring term: x or f or f(termArgs) */
 term: VARIABLE {
-        $<sval>$ = $<sval>1;
-        printf("reducing variable %s to term\n", $<sval>$);
+        printf("reducing variable %s to term\n", $<sval>1);
       }
     | FUNCTION {
-        $<sval>$ = $<sval>1;
-        printf("reducing to term %s\n", $<sval>$);
+        printf("reducing to term %s\n", $<sval>1);
       }
     | FUNCTION OPENPAR termArgs CLOSEPAR {
         char * x = malloc((strlen($<sval>1) + 20 + strlen($<sval>3))* sizeof(char));
@@ -56,7 +54,6 @@ term: VARIABLE {
         strcat(x, "("); 
         strcat(x, $<sval>3);
         strcat(x, ")");
-        strcat(x,  $<sval>3);
         $<sval>$ = strdup(x);
         free(x);
         printf("reducing to term %s\n", $<sval>$);
@@ -109,11 +106,11 @@ predArgs: term {
 /* declaring formula: */
 formula: atom {printf("reducing atom %s to formula\n", $<sval>1);}    
     | TOP {
-        $<sval>$ = $<sval>1;
+        $<sval>$ = " TOP";
         printf("reducing boolean TOP %s to formula\n", $<sval>$);
         }
     | BOTTOM {
-        $<sval>$ = $<sval>1;
+        $<sval>$ = " BOTTOM";
         printf("reducing boolean BOT %s to formula\n", $<sval>$);
         } 
     | ALL VARIABLE formula {

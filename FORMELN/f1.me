@@ -45,7 +45,7 @@ reducing atom P(x) to formula
 reducing to neagtion  NOT P(x)
 scanned implikation
 scanned bot
-reducing boolean BOT x to formula
-reducing to implication  NOT P(x) IMP x
-reducing to equivalence  EX x(P(x) AND Q22(x,y2)) OR Q(x) EQUIV  NOT P(x) IMP x
+reducing boolean BOT  BOTTOM to formula
+reducing to implication  NOT P(x) IMP  BOTTOM
+reducing to equivalence  EX x(P(x) AND Q22(x,y2)) OR Q(x) EQUIV  NOT P(x) IMP  BOTTOM
 Error: syntax error
