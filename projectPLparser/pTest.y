@@ -115,62 +115,73 @@ formula: atom {printf("reducing atom %s to formula\n", $<sval>1);}
         } 
     | ALL VARIABLE formula {
         char * x = malloc((strlen($<sval>2) + strlen($<sval>3) + 20)* sizeof(char));
-        strcat(x, " ALL ");
+        strcat(x, "(ALL ");
         strcat(x, $<sval>2); 
         strcat(x, $<sval>3);
+        strcat(x, ")");
         $<sval>$ = strdup(x);
         free(x);
         printf("reducing to all formula %s\n", $<sval>$);
       }
     | EX VARIABLE formula {
         char * x = malloc((strlen($<sval>2) + strlen($<sval>3) + 20)* sizeof(char));
-        strcat(x, " EX ");
+        strcat(x, "(EX ");
         strcat(x, $<sval>2); 
         strcat(x, $<sval>3);
+        strcat(x, ")");
         $<sval>$ = strdup(x);
         free(x);
         printf("reducing to existential formula %s\n", $<sval>$);
       }
     | formula AND formula {
         char * x = malloc((strlen($<sval>1) + 20 + strlen($<sval>3))* sizeof(char));
+        strcat(x, "(");
         strcat(x, $<sval>1);
         strcat(x, " AND "); 
         strcat(x,  $<sval>3);
+        strcat(x, ")");
         $<sval>$ = strdup(x);
         free(x);
         printf("reducing to conjunction %s\n", $<sval>$);
       }
     | formula OR formula {
         char * x = malloc((strlen($<sval>1) + 20 + strlen($<sval>3))* sizeof(char));
+        strcat(x, "(");
         strcat(x, $<sval>1);
         strcat(x, " OR "); 
         strcat(x,  $<sval>3);
+        strcat(x, ")");
         $<sval>$ = strdup(x);
         free(x);
         printf("reducing to disjunction %s\n", $<sval>$);
       }
     | formula IMP formula {
         char * x = malloc((strlen($<sval>1) + 20 + strlen($<sval>3))* sizeof(char));
+        strcat(x, "(");
         strcat(x, $<sval>1);
         strcat(x, " IMP "); 
         strcat(x,  $<sval>3);
+        strcat(x, ")");
         $<sval>$ = strdup(x);
         free(x);
         printf("reducing to implication %s\n", $<sval>$);
       }
     | formula BIIMP formula {
         char * x = malloc((strlen($<sval>1) + 20 + strlen($<sval>3))* sizeof(char));
+        strcat(x, "(");
         strcat(x, $<sval>1);
         strcat(x, " EQUIV "); 
         strcat(x,  $<sval>3);
+        strcat(x, ")");
         $<sval>$ = strdup(x);
         free(x);
         printf("reducing to equivalence %s\n", $<sval>$);
       }
     | NOT formula {
         char * x = malloc((strlen($<sval>2) + 20)* sizeof(char));
-        strcat(x, " NOT ");
+        strcat(x, "(NOT ");
         strcat(x, $<sval>2);
+        strcat(x, ")");
         $<sval>$ = strdup(x);
         free(x); 
         printf("reducing to neagtion %s\n", $<sval>$);

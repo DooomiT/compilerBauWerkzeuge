@@ -6,8 +6,8 @@ scanned allquantor
 scanned variable x
 scanned top
 reducing boolean TOP  TOP to formula
-reducing to all formula  ALL x TOP
-reducing to conjunction  TOP AND  ALL x TOP
+reducing to all formula (ALL x TOP)
+reducing to conjunction ( TOP AND (ALL x TOP))
 scanned OR
 scanned predicate Q
 scanned open brackets
@@ -43,5 +43,5 @@ reducing to term f(g(x,h(x,y,z)))
 scanned close brackets
 reducing to atom Q(f(g(x,h(x,y,z))))
 reducing atom Q(f(g(x,h(x,y,z)))) to formula
-reducing to disjunction  TOP AND  ALL x TOP OR Q(f(g(x,h(x,y,z))))
+reducing to disjunction (( TOP AND (ALL x TOP)) OR Q(f(g(x,h(x,y,z)))))
 Error: syntax error

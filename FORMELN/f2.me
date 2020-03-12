@@ -9,7 +9,7 @@ reducing variable x to term
 scanned close brackets
 reducing to atom P(x)
 reducing atom P(x) to formula
-reducing to all formula  ALL xP(x)
+reducing to all formula (ALL xP(x))
 scanned implikation
 scanned ex
 scanned variable x
@@ -20,10 +20,10 @@ reducing variable x to term
 scanned close brackets
 reducing to atom P(x)
 reducing atom P(x) to formula
-reducing to existential formula  EX xP(x)
+reducing to existential formula (EX xP(x))
 scanned close brackets
-reducing to implication  ALL xP(x) IMP  EX xP(x)
-reducing ( ALL xP(x) IMP  EX xP(x)) to formula
+reducing to implication ((ALL xP(x)) IMP (EX xP(x)))
+reducing (((ALL xP(x)) IMP (EX xP(x)))) to formula
 scanned AND
 scanned open brackets
 scanned predicate P
@@ -47,7 +47,7 @@ scanned close brackets
 reducing to atom P(f(c))
 reducing atom P(f(c)) to formula
 scanned OR
-reducing to disjunction P(c) OR P(f(c))
+reducing to disjunction (P(c) OR P(f(c)))
 scanned predicate P
 scanned open brackets
 scanned function f
@@ -66,7 +66,7 @@ scanned close brackets
 reducing to atom P(f(f(c)))
 reducing atom P(f(f(c))) to formula
 scanned close brackets
-reducing to disjunction P(c) OR P(f(c)) OR P(f(f(c)))
-reducing (P(c) OR P(f(c)) OR P(f(f(c)))) to formula
-reducing to conjunction ( ALL xP(x) IMP  EX xP(x)) AND (P(c) OR P(f(c)) OR P(f(f(c))))
+reducing to disjunction ((P(c) OR P(f(c))) OR P(f(f(c))))
+reducing (((P(c) OR P(f(c))) OR P(f(f(c))))) to formula
+reducing to conjunction ((((ALL xP(x)) IMP (EX xP(x)))) AND (((P(c) OR P(f(c))) OR P(f(f(c))))))
 Error: syntax error
